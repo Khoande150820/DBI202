@@ -22,15 +22,20 @@ CREATE TABLE Team(
 )
 
 CREATE TABLE Season(
-	year INT PRIMARY KEY
+	year INT PRIMARY KEY,
+	teamID int,
+	teamPoint int
+	MatchID int,
+	FOREIGN KEY (MatchID) REFERENCES Match(ID),
+	FOREIGN KEY (teamID) REFERENCES Team(id)
 )
+
 CREATE TABLE Match(
 	ID INT PRIMARY KEY,
 	Season int,
 	Team1 int,
 	Team2 int,
-	FOREIGN KEY (Team1) REFERENCES Team(ID),
-	FOREIGN KEY (Team2) REFERENCES Team(ID)
+	winner int,
 )
 
 CREATE TABLE Penalty(
@@ -40,3 +45,4 @@ CREATE TABLE Penalty(
 	fine INT,
 	FOREIGN KEY (playerID) REFERENCES Player(ID)
 )
+
