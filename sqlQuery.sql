@@ -1,3 +1,6 @@
+create database assignment
+use assignment
+
 CREATE TABLE Player(
 	id INT PRIMARY KEY,
 	name NVARCHAR(50),
@@ -21,22 +24,25 @@ CREATE TABLE Team(
 	FOREIGN KEY (coachID) REFERENCES Coach(id)
 )
 
+
 CREATE TABLE Season(
 	year INT PRIMARY KEY,
 	teamID int,
-	teamPoint int
+	teamPoint int,
 	MatchID int,
-	FOREIGN KEY (MatchID) REFERENCES Match(ID),
 	FOREIGN KEY (teamID) REFERENCES Team(id)
 )
 
 CREATE TABLE Match(
 	ID INT PRIMARY KEY,
-	Season int,
+	Date date,
 	Team1 int,
 	Team2 int,
 	winner int,
+	Season int,
+	FOREIGN KEY (Season) REFERENCES Season(Year)
 )
+
 
 CREATE TABLE Penalty(
 	id INT PRIMARY KEY,
@@ -45,4 +51,3 @@ CREATE TABLE Penalty(
 	fine INT,
 	FOREIGN KEY (playerID) REFERENCES Player(ID)
 )
-
