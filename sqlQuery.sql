@@ -1,4 +1,6 @@
-
+DROP DATABASE IF EXISTS AssignmentDBI
+CREATE DATABASE AssignmentDBI
+use AssignmentDBI
 
 CREATE TABLE Player(
 	id CHAR(8) PRIMARY KEY NOT NULL CHECK(id LIKE 'KORP[0-9][0-9][0-9][0-9]'),
@@ -26,7 +28,7 @@ CREATE TABLE Team(
 CREATE TABLE Season(
 	year INT PRIMARY KEY,
 	monthBegin INT CHECK (monthBegin BETWEEN 1 AND 12),
-	monthEnd INT CHECK (monthEnd BETWEEN 1 AND 12 AND monthEnd>monthBegin)
+	monthEnd INT CHECK (monthEnd BETWEEN 1 AND 12)
 )
 
 CREATE TABLE Contract(
