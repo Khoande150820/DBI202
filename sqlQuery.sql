@@ -1,27 +1,28 @@
 create database assignment
 use assignment
 
+CREATE TABLE Team(
+	id INT PRIMARY KEY,
+	name NVARCHAR(50),
+	playerID INT,
+	coachID INT,
+)
+
+
 CREATE TABLE Player(
 	id INT PRIMARY KEY,
 	name NVARCHAR(50),
 	role VARCHAR(5),
 	teamID INT,
 	penalty INT,
+	FOREIGN KEY (teamID) REFERENCES Team(ID)
 )
 
 CREATE TABLE Coach(
 	id INT PRIMARY KEY,
 	name nvarchar(50),
-	teamID INT
-)
-
-CREATE TABLE Team(
-	id INT PRIMARY KEY,
-	name NVARCHAR(50),
-	playerID INT,
-	coachID INT,
-	FOREIGN KEY (playerID) REFERENCES Player(id),
-	FOREIGN KEY (coachID) REFERENCES Coach(id)
+	teamID INT,
+	FOREIGN KEY (teamID) REFERENCES Team(ID)
 )
 
 
