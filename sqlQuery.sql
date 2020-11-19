@@ -26,7 +26,8 @@ CREATE TABLE Team(
 )
 
 CREATE TABLE Season(
-	year INT PRIMARY KEY,
+	id INT PRIMARY KEY,
+	year INT NOT NULL,
 	monthBegin INT CHECK (monthBegin BETWEEN 1 AND 12),
 	monthEnd INT CHECK (monthEnd BETWEEN 1 AND 12)
 )
@@ -44,8 +45,8 @@ CREATE TABLE Contract(
 CREATE TABLE Achievement(
 	TeamID INT,
 	SeasonID INT,
-	Point INT
+	Point INT,
 	FOREIGN KEY (TeamID) REFERENCES Team(id),
-	FOREIGN KEY (SeasonID) REFERENCES Season(year),
+	FOREIGN KEY (SeasonID) REFERENCES Season(id),
 	PRIMARY KEY (TeamID, SeasonID)
 )
