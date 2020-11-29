@@ -1,9 +1,19 @@
-DROP DATABASE IF EXISTS AssignmentDBI
-CREATE DATABASE AssignmentDBI
-use AssignmentDBI
+IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'AssignmentDBI')
+BEGIN
+	ALTER DATABASE [AssignmentDBI] SET OFFLINE WITH ROLLBACK IMMEDIATE;
+	ALTER DATABASE [AssignmentDBI] SET ONLINE;
+	DROP DATABASE [AssignmentDBI];
+END
+GO
+
+CREATE DATABASE [AssignmentDBI]
+GO
+
+USE [AssignmentDBI]
+GO
 
 CREATE TABLE Player(
-	id CHAR(8) PRIMARY KEY NOT NULL CHECK(id LIKE 'KORP[0-9][0-9][0-9][0-9]'),
+	id CHAR(8) PRIMARY KEY NOT NULL CHECK(id LIKE '[A-Z][A-Z][A-Z]P[0-9][0-9][0-9][0-9]'),
 	name NVARCHAR(100),
 	gender CHAR(1)  DEFAULT 'M' CHECK(Gender IN('F','M')) NOT NULL,
 	role NVARCHAR(10)
@@ -11,7 +21,7 @@ CREATE TABLE Player(
 
 CREATE TABLE Coach(
 	id CHAR(8) PRIMARY KEY NOT NULL CHECK(id LIKE 'KORC[0-9][0-9][0-9][0-9]'),
-	name NVARCHAR,
+	name NVARCHAR(100),
 	gender CHAR(1)  DEFAULT 'M' CHECK(Gender IN('F','M')) NOT NULL,
 	yearExperience INT,
 )
@@ -50,3 +60,4 @@ CREATE TABLE Achievement(
 	FOREIGN KEY (SeasonID) REFERENCES Season(id),
 	PRIMARY KEY (TeamID, SeasonID)
 )
+
